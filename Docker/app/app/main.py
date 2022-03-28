@@ -16,48 +16,6 @@ mycursor = mydb.cursor()
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    html_content = """
-    <html>
-        <head>
-            <title>Cours DEV Docker</title>
-        </head>
-        <body>
-            <h1>Hey! Do you want to safe some person into the DB ?</h1>
-            <form action="/person" method="POST">
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname"><br>
-
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname"><br>
-
-            <label for="street">Street:</label><br>
-            <input type="text" id="street" name="street"><br>
-
-            <label for="snumber">Street NB:</label><br>
-            <input type="text" id="cap" name="snumber"><br>
-
-            <label for="cap">CAP:</label><br>
-            <input type="text" id="cap" name="cap"><br>
-
-            <label for="city">City:</label><br>
-            <input type="text" id="city" name="city"><br>
-
-            <label for="city">Phone:</label><br>
-            <input type="text" id="phone" name="phone"><br>
-
-            <input style="margin-top:20px; width:200px" type="submit" value="Submit">
-            </form>
-            <form method="get" action="/persons">
-                <button type="submit" style="margin-top:20px; width:200px">To the persons list</button>
-            </form>
-        </body>
-    </html>
-    """
-    return HTMLResponse(content=html_content, status_code=200)
-
-
 @app.get("/persons")
 def read_item():
     mycursor.execute("SELECT * FROM persons")
