@@ -2,6 +2,7 @@ services:
   web:
     container_name: web
     image: nginx-image
+    restart: always
     depends_on:
       - app
     ports:
@@ -13,6 +14,7 @@ services:
 
   app:
     container_name: app
+    restart: always
     image: app-image
     depends_on:
       - mariadb
