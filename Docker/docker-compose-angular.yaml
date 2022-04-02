@@ -1,0 +1,11 @@
+version: '3.3'
+
+services:
+
+  angular:
+    container_name: angular-cli-container
+    image: angular-cli-image
+    build:
+        context: ./angular-cli
+    volumes:
+      - ./angular-cli/angular-app

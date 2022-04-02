@@ -16,7 +16,7 @@ mycursor = mydb.cursor()
 
 app = FastAPI()
 
-@app.get("/persons")
+@app.get("/api/persons")
 def read_item():
     mycursor.execute("SELECT * FROM persons")
     items = mycursor.fetchall()
@@ -48,7 +48,7 @@ def read_item():
     html_content += "</table><a href=/> Back to form</a></body></html>"        
     return HTMLResponse(content=html_content, status_code=200)
 
-@app.post("/person")
+@app.post("/api/person")
 async def save(fname: str = Form(...), \
                lname: str = Form(...), \
                street: str = Form(...), \

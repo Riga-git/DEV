@@ -1,7 +1,10 @@
+version: '3.3'
+
 services:
+
   web:
-    container_name: web
-    image: nginx-image
+    build:
+      context: ./web
     restart: always
     depends_on:
       - app
@@ -9,13 +12,14 @@ services:
       - "80:80"
     volumes:
       - ./web/conf.d:/etc/nginx/conf.d
+      - ./web/app-angular/:/usr/share/nginx/html/
     networks:
       - nginx_network
 
   app:
-    container_name: app
+    build:
+      context: ./app
     restart: always
-    image: app-image
     depends_on:
       - mariadb
     networks:
@@ -32,9 +36,6 @@ services:
       - MARIADB_ROOT_PASSWORD=root-pwd 
     volumes:
       - mariadb-data:/var/lib/mysql
-      # According to the official mysql documentation, 
-      # you can put more than one sql file in the docker-entrypoint-initdb.d, 
-      # they are executed in the alphabetical order
       - ./db/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
     networks:
       - nginx_network
@@ -56,3 +57,8 @@ volumes:
 networks:
   nginx_network:
     driver: bridge
+
+
+
+
+  
