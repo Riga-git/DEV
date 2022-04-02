@@ -56,8 +56,3 @@ volumes:
 networks:
   nginx_network:
     driver: bridge
-
-
-
-
-  
